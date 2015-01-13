@@ -1,20 +1,8 @@
 <?php
-class api_adaptive
+namespace JHuffman/API;
+class Adaptive
 {
 	const URL = 'https://live.adaptiveplanning.com/api/v7';
-
-	private $user;
-	private $pass;
-
-	public $instance;
-	public $version;
-	public $isDefault = 'false';
-	public $accounts = array();
-	public $level;
-	public $start;
-	public $end;
-	public $dimensions = array();
-	public $departments = array();
 
 	/**
 	* Adaptive importCubeData
@@ -29,12 +17,10 @@ class api_adaptive
 	*/
 	public static function importCubeData(
         $user, $pass, $actuals, $version, $sheet, $fields, $data,
-        $moveBPtr = "false", $allowParallel = "false",
+        $moveBPtr = "false", $allowParallel = "false", 
         $isUserAssigned = "false", $output = false
     ) {
         // Hard coded for now
-        //$moveBPtr = 'false';
-        //$allowParallel = 'false';
         $isDefault = 'false';
         if (empty($version)) {
             $isDefault = "true";
@@ -134,7 +120,7 @@ class api_adaptive
 	public static function exportData(
 		$user, $pass, $version, $start, $end, $levels, $accounts,
 		$dimensions = array(), $filterDimensions = array(), $isDefault = false,
-		$dumpXML = false
+		$output = false
 	) {
 		$xmlCreate =
             '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
@@ -179,7 +165,7 @@ class api_adaptive
 		}
 		$xmlCreate .= ' <rules includeZeroRows="false" includeRollups="false" markInvalidValues="false" markBlanks="false" timeRollups="false"></rules>' . "\n";
 		$xmlCreate .= '</call>' . "\n";
-		if ($dumpXML) {
+		if ($output) {
 			header('content-type:application/xml');
 			exit($xmlCreate);
 		}
@@ -329,7 +315,7 @@ class api_adaptive
 	 */
 	public static function eraseActuals(
 		$user, $pass, $version, $type, $sheet, $start, $end, $includeCellNotes = "false", 
-		$dumpXML = false
+		$output = false
 	) {
 		$results = false;
 		$xmlCreate =
@@ -348,7 +334,7 @@ class api_adaptive
 			'    includeCellNotes="'.$includeCellNotes.'" />' . "\n" .
             '</call>';
 
-		if ($dumpXML) {
+		if ($output) {
 			header('content-type:application/xml');
 			exit($xmlCreate);
 		}
