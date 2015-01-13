@@ -1,6 +1,7 @@
 <?php
 // PHP 5.3 and later:
 namespace JHuffman\API;
+
 class Adaptive
 {
 	const URL = 'https://live.adaptiveplanning.com/api/v7';
@@ -17,9 +18,17 @@ class Adaptive
 	* @return string
 	*/
 	public static function importCubeData(
-        $user, $pass, $actuals, $version, $sheet, $fields, $data,
-        $moveBPtr = "false", $allowParallel = "false", 
-        $isUserAssigned = "false", $output = false
+        $user, 
+		$pass, 
+		$actuals, 
+		$version, 
+		$sheet, 
+		$fields, 
+		$data,
+        $moveBPtr = "false", 
+		$allowParallel = "false", 
+        $isUserAssigned = "false", 
+		$output = false
     ) {
         // Hard coded for now
         $isDefault = 'false';
@@ -67,8 +76,15 @@ class Adaptive
     * @return string
     */
     public static function importStandardData(
-        $user, $pass, $actuals, $version, $fields, $data, $moveBPtr = "false",
-        $allowParallel = "false", $output = false
+        $user, 
+		$pass, 
+		$actuals, 
+		$version, 
+		$fields, 
+		$data, 
+		$moveBPtr = "false",
+        $allowParallel = "false", 
+		$output = false
     ) {
         // Hard coded for now
         $isDefault = "false";
@@ -119,8 +135,16 @@ class Adaptive
 	* @return array of records
 	*/
 	public static function exportData(
-		$user, $pass, $version, $start, $end, $levels, $accounts,
-		$dimensions = array(), $filterDimensions = array(), $isDefault = false,
+		$user, 
+		$pass, 
+		$version, 
+		$start, 
+		$end, 
+		$levels, 
+		$accounts,
+		$dimensions = array(), 
+		$filterDimensions = array(), 
+		$isDefault = false,
 		$output = false
 	) {
 		$xmlCreate =
@@ -281,8 +305,10 @@ class Adaptive
 			'   <credentials login="' . $user . '" password="' . $pass . '"/>' . "\n" .
 			'</call>';
 		$response = self::send($xmlCreate);
-		header('content-type:application/xml');
-		exit($response);
+		if ($output) {
+			header('content-type:application/xml');
+			exit($response);
+		}
 		if ($results = simplexml_load_string($response)) {
 			if (is_array($results)) {
 				$accounts = $results->output->accounts;
@@ -315,7 +341,14 @@ class Adaptive
 	 * @return bool true on success
 	 */
 	public static function eraseActuals(
-		$user, $pass, $version, $type, $sheet, $start, $end, $includeCellNotes = "false", 
+		$user, 
+		$pass, 
+		$version, 
+		$type, 
+		$sheet, 
+		$start, 
+		$end, 
+		$includeCellNotes = "false", 
 		$output = false
 	) {
 		$results = false;
