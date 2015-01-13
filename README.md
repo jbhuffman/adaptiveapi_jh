@@ -13,12 +13,15 @@ require_once 'adaptive.php';
 use \JHuffman\API;
 
 // will return any errors or other messages from an import INTO Adaptive
+// Defaults/Optional :: $moveBPtr = "false", $allowParallel = "false", $isUserAssigned = "false", $output = false;
 $response = Adaptive::importCubeData($user, $pass, $actuals, $version, $sheet, $fields, $data, $moveBPtr, $allowParallel, $isUserAssigned, $output);
 
 // will return any errors or other messages from an import INTO Adaptive
+// Defaults/Optional :: $moveBPtr = "false", $allowParallel = "false", $output = false;
 $response = Adaptive::importStandardData($user, $pass, $actuals, $version, $fields, $data, $moveBPtr, $allowParallel, $output);
 
 // will return data FROM Adaptive based on passed in options
+// Defaults/Optional :: $dimension = array(), $filterDimensions = array(), $isDefault = "false", $output = false;
 $response = Adaptive::exportData($user, $pass, $version, $start, $end, $levels, $accounts, $dimensions, $filterDimensions, $isDefault, $output);
 
 // get Adaptive "Versions"
@@ -31,9 +34,11 @@ $response = Adaptive::exportLevels($user, $pass);
 $response = Adaptive::exportDimensions($user, $pass);
 
 // get Adaptive "Accounts"
+// Defaults/Optional :: $output = false;
 $response = Adaptive::exportAccounts($user, $pass, $output);
 
 // erase Actuals for a specific range, version, sheet
+// Defaults/Optional :: $includeCellNotes = "false", $output = false
 $response = Adaptive::eraseActuals($user, $pass, $version, $type, $sheet, $start, $end, $includeCellNotes, $output);
 
 // sends the request.  This most likely won't be called by your script as it is called within each data methods
@@ -45,8 +50,6 @@ $response = processResponse($xml);
 
 ```
 
-parseVersions() is a private method to flatten the version structure into a single dimension array
-
-parseLevels() is a private method to flatten the level structure into a single dimension array
-
-parseAccounts() is a private method to flatten the account structure into a single dimension array
+* parseVersions() is a private method to flatten the version structure into a single dimension array
+* parseLevels() is a private method to flatten the level structure into a single dimension array
+* parseAccounts() is a private method to flatten the account structure into a single dimension array
