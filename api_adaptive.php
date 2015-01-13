@@ -1,5 +1,6 @@
 <?php
-namespace JHuffman/API;
+// PHP 5.3 and later:
+namespace JHuffman\API;
 class Adaptive
 {
 	const URL = 'https://live.adaptiveplanning.com/api/v7';
