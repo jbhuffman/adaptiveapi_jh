@@ -79,7 +79,7 @@ class api_adaptive
     * @param mixed $output
     * @return string
     */
-    public function importStandardData(
+    public static function importStandardData(
         $user, $pass, $actuals, $version, $fields, $data, $moveBPtr = "false",
         $allowParallel = "false", $output = false
     ) {
@@ -546,7 +546,7 @@ class api_adaptive
 	*
 	* @return array of clean values
 	*/
-	private function parseAccounts($arr)
+	private static function parseAccounts($arr)
 	{
 		$results = array();
 		if (count($arr) > 0) {
