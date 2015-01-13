@@ -4,10 +4,11 @@
  */
 require_once 'adaptive.php';
 
-use \JHuffman\API;
+use JHuffman\API;
 
 $user = 'adaptiveuser';
 $pass = 'adaptivepassword';
 
 // usage
-$levels = Adaptive::exportLevels($user, $pass);
+$levels = JHuffman\API\Adaptive::exportLevels($user, $pass);
+print_r($levels, false);
