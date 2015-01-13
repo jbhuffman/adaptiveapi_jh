@@ -8,7 +8,7 @@ Follows version 7 of the Adaptive Insights API.  It is a static class that imple
 
 ```
 // Usage
-require_once 'api_adaptive.php';
+require_once 'adaptive.php';
 
 use \JHuffman\API;
 
